@@ -2,6 +2,7 @@
 const validator = require('validator');
 const yargs = require('yargs');
 const notes = require('./notes.js');
+const { default: chalk } = require('chalk');
 
 //
 yargs.version('1.1.0');
@@ -21,14 +22,14 @@ yargs.command({
       demandOption: true,
     },
   },
-  handler: function (argv) {
+  handler(argv) {
     notes.addNote(argv.title, argv.body);
   },
 });
 yargs.command({
   command: 'remove',
   describe: 'Remove a note from the list',
-  handler: function (argv) {
+  handler(argv) {
     notes.remove(argv.title);
   },
 });
@@ -36,7 +37,7 @@ yargs.command({
   command: 'read',
   showInHelp: true,
   describe: 'Read a note from the list',
-  handler: function () {
+  handler() {
     console.log('reading a note ');
   },
 });
@@ -44,8 +45,16 @@ yargs.command({
   command: 'list',
   showInHelp: true,
   describe: 'Get a list of all notes',
-  handler: function () {
-    console.log('List of all notes are \n'+notes.list());
+  handler() {
+    const noteList = notes.list();
+    noteList.forEach((note, index)=>{
+      if(index % 2){
+        console.log(chalk.black.bgGreenBright.bold(note.title + ' : ' + note.body));
+      }else{
+        console.log(chalk.black.bgMagentaBright.bold(note.title + ' : ' + note.body));
+      }
+      
+    })
   },
 });
 
