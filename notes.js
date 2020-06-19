@@ -41,7 +41,9 @@ const removeNote = (_title) => {
 const readNotesByTitle = (_title) => {
   const noteArr = loadNotesFromFile();
   const noteObj = noteArr.find((note) => note.title === _title);
+  debugger
   //
+  
   if (noteObj != undefined) {
     log(chalk.black.bgGreenBright.bold(noteObj.body));
   } else {
