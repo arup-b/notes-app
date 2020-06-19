@@ -37,8 +37,8 @@ yargs.command({
   command: 'read',
   showInHelp: true,
   describe: 'Read a note from the list',
-  handler() {
-    console.log('reading a note ');
+  handler(argv) {
+    notes.read(argv.title);
   },
 });
 yargs.command({
@@ -59,4 +59,6 @@ yargs.command({
 });
 
 yargs.parse();
-// start with chapter 4, video 5,  storing data with JSON
+
+
+// start with chapter 4, video 11: @ 5:17,  implement READ functionality by Title
