@@ -38,6 +38,16 @@ const removeNote = (_title) => {
     log(chalk.white.bgRedBright.bold('Note with title "' + _title + '" does not exist'));
   }
 };
+const readNotesByTitle = (_title) => {
+  const noteArr = loadNotesFromFile();
+  const noteObj = noteArr.find((note) => note.title === _title);
+  //
+  if (noteObj != undefined) {
+    log(chalk.black.bgGreenBright.bold(noteObj.body));
+  } else {
+    log(chalk.white.bgRedBright.bold('Note with title "' + _title + '" does not exist!'));
+  }
+};
 // helper functions
 const loadNotesFromFile = () => {
   try {
@@ -56,4 +66,5 @@ module.exports = {
   addNote: saveNote,
   remove: removeNote,
   list: getNotes,
+  read: readNotesByTitle,
 };
